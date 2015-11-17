@@ -1,0 +1,24 @@
+{
+  "name": "angularWeb",
+  "version": "1.0.0",
+  "authors": [
+    "xuxl <xuxle@yonyou.com>"
+  ],
+  "main": "app.js",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "~1.4.7",
+    "angular-animate": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}
