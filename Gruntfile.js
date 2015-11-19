@@ -146,6 +146,13 @@ module.exports = function (grunt) {
                     'bower_components/jquery/dist/jquery.js'
                 ]
             },
+            rstyles: {
+                expand: true,
+                dot: true,
+                cwd: '<%= config.app %>',
+                dest: '<%= config.temp %>',
+                src: ['<%= config.styles %>/*']
+            },
             release: {
                 files: [{
                     expand: true,
@@ -155,7 +162,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '<%= config.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
-                        '{,*/}*.html'
+                        '*.html',
+                        'tpls/**/*.html'
                     ]
                 }, {
                     expand: true,
@@ -246,11 +254,13 @@ module.exports = function (grunt) {
         'wiredep', 
         'useminPrepare',
         'jshint',
+        'copy:rstyles',
         'concat',
         'cssmin',
         'uglify',
-        //'imagemin',
+        'imagemin',
         'copy:release',
+        'filerev',
         'usemin'
     ]);
 
