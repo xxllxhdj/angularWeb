@@ -149,8 +149,7 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '<%= config.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
-                        '*.html',
-                        'tpls/**/*.html'
+                        '*.html'
                     ]
                 }, {
                     expand: true,
@@ -204,10 +203,16 @@ module.exports = function (grunt) {
                     '<%= config.dist %>',
                     '<%= config.dist %>/img',
                     '<%= config.dist %>/css'
-                ]
+                ],
+                patterns: {
+                    js: [
+                        [/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']
+                    ]
+                }
             },
             html: ['<%= config.dist %>/{,*/}*.html'],
-            css: ['<%= config.dist %>/css/{,*/}*.css']
+            css: ['<%= config.dist %>/css/{,*/}*.css'],
+            js: ['<%= config.dist %>/js/{,*/}*.js'],
         },
 
         imagemin: {
@@ -222,7 +227,20 @@ module.exports = function (grunt) {
                     dest: '<%= config.temp %>/img/'
                 }]
             }
-        }
+        },
+
+        ngtemplates: {
+            dist: {
+                options: {
+                    module: 'angularWeb',
+                    //htmlmin: '<%= htmlmin.dist.options %>',
+                    usemin: 'js/scripts.js'
+                },
+                cwd: '<%= config.app %>',
+                src: 'tpls/{,*/}*.html',
+                dest: '.tmp/templateCache.js'
+            }
+        },
     });
 
     grunt.registerTask('debug', [
@@ -241,6 +259,7 @@ module.exports = function (grunt) {
         'useminPrepare',
         'jshint',
         'copy:rstyles',
+        'ngtemplates',
         'concat',
         'cssmin',
         'uglify',
