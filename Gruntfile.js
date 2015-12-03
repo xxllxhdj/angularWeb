@@ -133,19 +133,6 @@ module.exports = function (grunt) {
                     'tpls/**/*.html'
                 ]
             },
-            libs: {
-                expand: true,
-                dot: true,
-                cwd: '<%= config.app %>',
-                dest: '<%= config.dist %>',
-                src: [
-                    'bower_components/angular/angular.js',
-                    'bower_components/angular-animate/angular-animate.js',
-                    'bower_components/angular-ui-router/release/angular-ui-router.js',
-                    'bower_components/bootstrap/dist/js/bootstrap.js',
-                    'bower_components/jquery/dist/jquery.js'
-                ]
-            },
             rstyles: {
                 expand: true,
                 dot: true,
@@ -245,8 +232,7 @@ module.exports = function (grunt) {
         'copy:scripts',
         'copy:styles',
         'copy:images',
-        'copy:htmls',
-        'copy:libs'
+        'copy:htmls'
     ]);
 
     grunt.registerTask('release', [
